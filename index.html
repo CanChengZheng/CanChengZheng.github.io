@@ -240,6 +240,316 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/Java-Annotation-注解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZCC">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/22211624?v=3&u=6caf3b6c049755ce7c1df157d158a088f344cc65&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CC">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/15/Java-Annotation-注解/" itemprop="url">
+                  Java Annotation 注解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-15T12:16:31+08:00">
+                2017-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>整理来自《疯狂Java》</p>
+</blockquote>
+<h1 id="Annotation-基本概况"><a href="#Annotation-基本概况" class="headerlink" title="Annotation 基本概况"></a>Annotation 基本概况</h1><ol>
+<li>Annotation 是代码里的特殊标记，这些标记可以在编译、类加载、运行时被读取，并执行响应的处理。</li>
+<li>通过使用注解，程序开发人员可以在<strong>不改变原有逻辑的情况</strong>下，在源文件中<strong>嵌入一些补充的信息</strong>。代码分析工具、开发工具和部署工具可以通过这些补充信息进行验证或者进行部署。</li>
+<li>Annotation 提供了一种为程序元素设置元数据的方法，从某些方面来看，Annotation 就像修饰符一样，可用于修饰包、类、构造器、方法、成员变量、参数、局部变量的声明，这些信息被存储在 Annotation 的“name=value”对中。</li>
+<li>Annotation是一个接口，程序可以通过反射来获取指定程序元素的  Annotation 对象，然后通过 Annotation 对象来取得注解里的元数据。</li>
+<li>Annotation 不影响程序代码的执行，无论增加、删除 Annotation ，代码都始终如一地执行。如果希望让程序中 Annotation 在运行时起一定的作用，只有通过某种配套的工具对 Annotation 中的信息进行访问和处理，访问和处理 Annotation 的工具统称为 APT(Annotation Processing Tool)。</li>
+<li>使用 Annotation 时要在其前面增加 @ 符号，并把该 Annotation 当作一个修饰符使用，用于修饰它支持的程序元素。</li>
+</ol>
+<h1 id="Java-5个基本-Annotation"><a href="#Java-5个基本-Annotation" class="headerlink" title="Java 5个基本 Annotation"></a>Java 5个基本 Annotation</h1><p>Java 提供了5个基本 Annotation：   </p>
+<ul>
+<li>@Override</li>
+<li>@Deprecated</li>
+<li>@SuppressWarnings</li>
+<li>@SafeVarargs</li>
+<li>@FunctionInterface</li>
+</ul>
+<h2 id="1-限定重写父类方法：-Override"><a href="#1-限定重写父类方法：-Override" class="headerlink" title="1. 限定重写父类方法：@Override"></a>1. 限定重写父类方法：@Override</h2><ol>
+<li>@Override 是用来指定方法覆载的，可以强制一个子类必须覆盖父类的方法。</li>
+<li>@Override 的作用是告诉编译器检查这个方法，保证父类要包含一个被该方法重写的方法，否则就会编译出错。</li>
+<li>@Override主要是帮助程序员避免一些低级错误，而给后期排错时造成巨大障碍。</li>
+<li>@Override 只能修饰方法，不能修饰其他程序元素。</li>
+<li>示例代码：   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fruit</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;</div><div class="line">      System.out.println(<span class="string">"水果~"</span>);</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">extends</span> <span class="title">Fruit</span></span>&#123;</div><div class="line">   <span class="comment">// 使用@Override指定下面方法必须重写父类方法   </span></div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;</div><div class="line">      System.out.println(<span class="string">"苹果~"</span>);   </div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="2-标示已过时：-Deprecated"><a href="#2-标示已过时：-Deprecated" class="headerlink" title="2. 标示已过时：@Deprecated"></a>2. 标示已过时：@Deprecated</h2><ol>
+<li>@Deprecated 用于表示某个程序元素（类、方法等）已过时，当其他程序使用已过时的类、方法时，编译器将会给出警告。</li>
+<li>@Deprecated 的作用于文档注释中过的 @deprecated 标记的作用基本相同，但它们的用法不同，前者是 JDK 5 才支持的注解，无须放在文档注释语法（/<em>*..</em>/部分）中，而是直接用于修饰程序中的程序单元，如方法、类、接口等。</li>
+<li>示例代码，如下程序指定 Apple 中的 info() 方法已过时，其他程序中使用 Apple 类的 info() 方法时编译器将会给出警告。   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span>&#123;</div><div class="line">   <span class="comment">// 定义 info 方法已过时</span></div><div class="line">   <span class="meta">@Deprecated</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"Apple的info方法"</span>);   </div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeprecatedTest</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      <span class="comment">// 下面使用info()方法时将会被编译器警告</span></div><div class="line">      <span class="keyword">new</span> Apple().info();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="3-抑制编译器警告：-SuppressWarnings"><a href="#3-抑制编译器警告：-SuppressWarnings" class="headerlink" title="3. 抑制编译器警告：@SuppressWarnings"></a>3. 抑制编译器警告：@SuppressWarnings</h2><ol>
+<li>@SuppressWarnings 指示被该 Annotation 修饰的程序元素（以及该程序元素中的所有子元素）取消显示指定的编译器警告。</li>
+<li>@SuppressWarnings 会一直作用于该程序元素的所有子元素。例如，使用 @SuppressWarnings 修饰某个类取消显示某个编译器警告，同时又修饰该类里的某个方法取消显示另一个编译器警告，那么该方法将会同时取消显示这两个编译器警告。</li>
+<li>当使用 @SuppressWarnings Annotation 来关闭编译器警告时，一定要在括号里使用 name=value 的形式为该 Annotation 的成员变量设置值。 //TODO 如何为Annotation 添加成员变量</li>
+<li><p>示例代码：   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SuppressWarnings</span>(value=<span class="string">"unchecked"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuppressWarningsTest</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">      List&lt;String&gt; myList = <span class="keyword">new</span> ArrayList(); <span class="comment">// ①</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>程序中的使用 @SuppressWarnings 来关闭 SuppressWarnings 类里的所有编译器警告，编译上面程序时将不会看到任何编译器警告。如果删除 @SuppressWarnings 注解，将会在①处看到编译器警告。</p>
+<h2 id="4-Java-7-的“堆污染”警告与-SafeVarags"><a href="#4-Java-7-的“堆污染”警告与-SafeVarags" class="headerlink" title="4. Java 7 的“堆污染”警告与 @SafeVarags"></a>4. Java 7 的“堆污染”警告与 @SafeVarags</h2></li>
+<li><p>首先了解下堆污染</p>
+<ol>
+<li>示例代码：   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">List list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();  <span class="comment">// list未定义泛型</span></div><div class="line">List.add(<span class="number">20</span>);  <span class="comment">// 添加元素时引发 unchecked 异常</span></div><div class="line"><span class="comment">// 下面代码引起“未经检查的转换”的警告，编译、运行时完全正常</span></div><div class="line">List&lt;String&gt; ls = list;  <span class="comment">// ①</span></div><div class="line"><span class="comment">// 但只要访问 ls 里的元素，如下面代码就会引起运行时异常</span></div><div class="line">System.out.prinln(ls.get(<span class="number">0</span>));</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在上述代码中可能导致运行时异常，Java把引发这种错误的原因称为“堆污染”（Heap pollution），当吧一个不带泛型的对象赋给一个带泛型的变量时，往往就会发生这种“堆污染”，如上①处代码所示。</p>
+<ol>
+<li>对于形参个数可变的方法，该形参的类型又是泛型，这将更容易导致“堆污染”。例如方法：<code>public static void faultyMethod(List&lt;String&gt;... listStrArray)</code></li>
+<li>在Java6以及更早的版本中，Java 编译器认为上面的 faultyMethod() 方法完全没有问题，既不会提示错误，也没有提示警告。等到使用该方法时，将会引发一个 unchecked 警告。</li>
+<li>从 Java7 开始，Java 编译器将会进行更严格的检查，Java 编译器在编译 ErrorUtils 时就会发出警告，保证开发者更早地注意到程序中可能存在的漏洞。</li>
+</ol>
+</li>
+<li>@SuppressWarnings   <ol>
+<li>在有些时候，开发者不希望看到这个警告，则可以使用如下三种方式来“抑制”这个警告<ul>
+<li>使用 @SafeVarargs 修饰引发该警告的方法或构造器。</li>
+<li>使用 @SuppressWarnings(“unchecked”) 修饰。</li>
+<li>编译时使用 -Xlint:varargs 选项。</li>
+</ul>
+</li>
+<li>第三种方式比较少用，通常可以选择第一种或第二种方式，尤其是使用 @SafeVarargs 修饰引发该警告的方法或构造器，它是 Java7 专门为抑制“堆污染”警告提供的。如果使用 @SafeVarargs 修饰上述的 faultyMethod() 方法，将不会发出任何警告。 <h2 id="5-Java-8-的函数式接口与-FunctionInterface"><a href="#5-Java-8-的函数式接口与-FunctionInterface" class="headerlink" title="5. Java 8 的函数式接口与 @FunctionInterface"></a>5. Java 8 的函数式接口与 @FunctionInterface</h2></li>
+</ol>
+</li>
+</ol>
+<h1 id="JDK-的元-Annotation"><a href="#JDK-的元-Annotation" class="headerlink" title="JDK 的元 Annotation"></a>JDK 的元 Annotation</h1><ol>
+<li>使用@Retention</li>
+<li>使用@Target</li>
+<li>使用@Document</li>
+<li>使用@Inherited</li>
+</ol>
+<h1 id="自定义-Annotation"><a href="#自定义-Annotation" class="headerlink" title="自定义 Annotation"></a>自定义 Annotation</h1><h2 id="定义-Annotation"><a href="#定义-Annotation" class="headerlink" title="定义 Annotation"></a>定义 Annotation</h2><h2 id="提取-Annotation-信息"><a href="#提取-Annotation-信息" class="headerlink" title="提取 Annotation 信息"></a>提取 Annotation 信息</h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/Java类加载机制与反射/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZCC">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/22211624?v=3&u=6caf3b6c049755ce7c1df157d158a088f344cc65&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CC">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/27/Java类加载机制与反射/" itemprop="url">
+                  Java类加载机制与反射
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T23:52:50+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/03/GitHub-Hexo-搭建博客详细教程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -430,7 +740,7 @@
 </li>
 <li><p>启用主题</p>
 <ol>
-<li>输入命令<code>hexo clean</code>，清楚旧主题生成的缓存</li>
+<li>输入命令<code>hexo clean</code>，清除旧主题生成的缓存</li>
 <li><p>输入以下命令，从Hexo的根目录进入你复制的主题目录,抓取主题最新版本并merge到本地  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd themes/jacman</div><div class="line">$ git pull</div></pre></td></tr></table></figure>
 </li>
@@ -456,7 +766,7 @@
 <li><code>hexo new page &quot;pageName&quot;</code> 新建页面</li>
 </ol>
 </li>
-<li>生成的文章会存在于 “你的博客目录\source_posts” 目录下</li>
+<li>生成的文章会存在于 “你的博客目录\source\_posts” 目录下</li>
 <li>文章默认的格式是.md，使用的是 <a href="http://www.jianshu.com/p/q81RER" target="_blank" rel="external">markdown 语法</a>，推荐一个不错的 <a href="http://markdownpad.com/" target="_blank" rel="external">Markdown编辑器 - MarkdownPad 2</a></li>
 <li>如果暂时没学过Markdown，可以先随便写点什么上去，ctrl + s 保存</li>
 <li>现在对新生成的文章进行预览<ol>
@@ -505,11 +815,12 @@
 <li>关于域名的绑定，博客现在是绑定在Github的域名上的，可以通过你的username.github.io访问你的博客，如果将来你买了自己的域名，可以将这个域名绑定到Github上，就可以通过你购买的域名访问你的博客了，这是后话了，具体可以自行Google，就不再详述了。</li>
 </ol>
 <h2 id="Hexo常用的几个命令"><a href="#Hexo常用的几个命令" class="headerlink" title="Hexo常用的几个命令"></a>Hexo常用的几个命令</h2><ol>
+<li>hexo new “postName”<br>新建文章，postName是新建的文章的名字，内容就在这里面编写</li>
+<li>hexo new page “pageName”<br>新建页面</li>
+<li>hexo clean<br>清除旧主题生成的缓存</li>
 <li>hexo generate (hexo g)<br>生成静态文件，会在当前目录下生成一个新的名为 public 的文件夹</li>
 <li>hexo server (hexo s)<br>启动本地web服务，用于博客的预览</li>
 <li>hexo deploy (hexo d)<br>部署博客到远程服务器上，比如github，heroku等平台</li>
-<li>hexo new “postName”<br>新建文章，postName是新建的文章的名字，内容就在这里面编写</li>
-<li>hexo new page “pageName”<br>新建页面</li>
 </ol>
 <h2 id="最后讲点什么"><a href="#最后讲点什么" class="headerlink" title="最后讲点什么"></a>最后讲点什么</h2><ul>
 <li>本篇博文大量参考借鉴了这篇文章开头列出的博文内容，我也是根据里面的内容来实践，并编写自己的这篇博文，可能存在部分内容相似相同的情况，我在那篇博文的基础上，加上了一些我在实际操作中遇到的问题的见解，修正了些错别字的问题。</li>
@@ -983,7 +1294,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -996,7 +1307,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
