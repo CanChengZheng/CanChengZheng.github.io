@@ -95,10 +95,11 @@
 <meta property="og:site_name" content="CC">
 <meta property="og:description" content="借鉴文章：最适合新手的 GitHub + Hexo 「大话」博客搭建教程 – smartbeng   前面说一两句，搭建博客可以先不考虑域名问题，本教程最终会绑定在Github上，只需要一个Github账号即可。 在下面教程需要输入的命令中，如 $ git config ，这里的「$」是命令前面的固定前缀，是不需要输入的，只需要输入 git config 即可。  安装Node.js Node.">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9f1104fcgy1ff8i7nvshmj20ci05mwei.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/9f1104fcgy1fif0avgraoj20g508y0t7.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7g8hz1jcj20g509ygm1.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7gg3eauhj20g509yjrt.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7i83qf3aj20fm0490ss.jpg">
-<meta property="og:updated_time" content="2017-06-15T04:30:24.200Z">
+<meta property="og:updated_time" content="2017-08-10T16:11:56.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GitHub + Hexo 搭建博客详细教程">
 <meta name="twitter:description" content="借鉴文章：最适合新手的 GitHub + Hexo 「大话」博客搭建教程 – smartbeng   前面说一两句，搭建博客可以先不考虑域名问题，本教程最终会绑定在Github上，只需要一个Github账号即可。 在下面教程需要输入的命令中，如 $ git config ，这里的「$」是命令前面的固定前缀，是不需要输入的，只需要输入 git config 即可。  安装Node.js Node.">
@@ -404,7 +405,7 @@
 <li>该文件夹用于存放Hexo工具，以及以后写的博文也会先在这个文件夹中进行编辑）</li>
 </ul>
 </li>
-<li>进入该文件夹，右键 -&gt; Git Bash Here 打开 Git，输入命令 <code>$ npm install -g hexo</code>，根据网络情况，可能需要等到一段时间，安装成功，Git 界面如下图所示。<br><img src="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7g8hz1jcj20g509ygm1.jpg" alt=""></li>
+<li>进入该文件夹，右键 -&gt; Git Bash Here 打开 Git，输入命令 <code>$ npm install -g hexo</code>，根据网络情况，可能需要等到一段时间，安装成功，Git 界面如下图所示。<br>输入命令之后的界面：<br><img src="http://ww1.sinaimg.cn/large/9f1104fcgy1fif0avgraoj20g508y0t7.jpg" alt=""><br>安装完成的界面：<br><img src="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7g8hz1jcj20g509ygm1.jpg" alt=""></li>
 <li>接下来输入命令 <code>$ hexo init</code> 回车运行，Hexo会在目标文件夹建立网站所需要的所有文件。同样根据网络情况，可能需要等待一段时间，才能完成。<br>初始化成功后，Git 界面如下图所示。<br><img src="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7gg3eauhj20g509yjrt.jpg" alt=""></li>
 <li>现在已经搭建起了一个本地博客，输入一下命令进行验证<ol>
 <li><code>$ hexo g</code> 生成博客</li>
@@ -492,8 +493,14 @@
 </ol>
 <h2 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h2><ol>
 <li>以后发布博客只需要三步：<ol>
-<li>hexo new “postname” 新建并编写博文，</li>
-<li>hexo g 生成博客</li>
+<li>hexo new “postname” <ul>
+<li>新建并编写博文，</li>
+</ul>
+</li>
+<li>hexo g<ul>
+<li>生成博客</li>
+</ul>
+</li>
 <li>双击 deploy.sh 脚本文件，输入账号密码即可完成发布。</li>
 </ol>
 </li>
@@ -647,7 +654,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -660,7 +667,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

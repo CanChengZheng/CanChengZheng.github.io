@@ -240,6 +240,155 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/Android-Activity-的四种启动模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZCC">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/22211624?v=3&u=6caf3b6c049755ce7c1df157d158a088f344cc65&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CC">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/08/10/Android-Activity-的四种启动模式/" itemprop="url">
+                  Android Activity 的四种启动模式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T22:43:05+08:00">
+                2017-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>整理自《第一行代码——Android（第2版）》</p>
+</blockquote>
+<h1 id="Activity-的启动模式"><a href="#Activity-的启动模式" class="headerlink" title="Activity 的启动模式"></a>Activity 的启动模式</h1><ol>
+<li>在实际项目中我们可能由于特定的需求为每个 Activity 指定恰当的启动模式。</li>
+<li>Activity 的启动模式一共有4种，分别是 <code>standard</code>、<code>singleTop</code>、<code>singleTask</code> 和 <code>singleInstance</code>。</li>
+<li><strong>启动模式的配置</strong>：通过在 AndroidManifest.xml 中通过给 <activity> 标签指定 android:launchMode 属性来配置启动模式。</activity></li>
+</ol>
+<h1 id="Standard"><a href="#Standard" class="headerlink" title="Standard"></a>Standard</h1><ol>
+<li><code>standard</code> 是 Activity <strong>默认的启动模式</strong>，在不进行显式指定的情况下，所有 Activity 都会自动使用这种启动模式。</li>
+<li>我们知道 Android 是使用返回栈来管理 Activity 。对于使用 <code>standard</code> 模式的 Activity，系统不会在乎这个 Activity 是否已经存在于返回栈中，每次启动都会创建该 Activity 的一个新的实例。每当启动一个新的 Activity，它就会在返回栈中入栈，并处于栈顶的位置。</li>
+</ol>
+<h1 id="singleTop"><a href="#singleTop" class="headerlink" title="singleTop"></a>singleTop</h1><ol>
+<li>当 Activity 的启动模式指定为 <code>singleTop</code>，在启动 Activity 时如果发现返回栈的<strong>栈顶</strong>已经是该 Activity，则认为可以直接使用它，不会再创建新的 Activity 实例。</li>
+<li>而当启动模式为 <code>singleTop</code> 的 Activity 已经存在于返回栈中，但并不位于栈顶，此时再启动该 Activity ，还是会创建新的实例。</li>
+<li>根据第 2 点可以看出，<code>singleTop</code> 模式可能存在的问题是，如果该 Activity 并没有处于栈顶的位置，还是可能会创建多个 Activity 实例。要解决该问题，就需要用到第三种启动模式 <code>singleTask</code>。</li>
+</ol>
+<h1 id="singleTask"><a href="#singleTask" class="headerlink" title="singleTask"></a>singleTask</h1><ol>
+<li>使用 <code>singleTask</code> 模式可以很好地解决重复创建栈顶 Activity 的问题。</li>
+<li>当 Activity 的启动模式指定为 <code>singleTask</code> ，每次启动该 Activity 时，系统首先会在返回栈中检查是否存在该 Activity 的实例，如果发现已经存在则直接使用该实例，并把返回栈中在这个 Activity 之上的所有 Activity 都出栈，如果没有发现就会创建一个新的Activity 实例。</li>
+</ol>
+<h1 id="singleInstance"><a href="#singleInstance" class="headerlink" title="singleInstance"></a>singleInstance</h1><ol>
+<li>不同于其他 3 种启动模式，指定为 singleInstance 模式的 Activity 会<strong>启用一个新的返回栈</strong>来管理这个 Acitivity。</li>
+<li>适用的场景：假设我们的程序中有一个 Activity 是允许其他程序调用的，我们想实现其他程序和我们的程序可以共享这个 Activity 的实例。<ol>
+<li>如果使用前面 3 种启动模式肯定是做不到的，因为每个应用程序都会有自己的返回栈，同一个 Activity 在不同的返回栈中入栈时必然是创建了新的实例。</li>
+<li>使用 <code>singleInstance</code> 模式就可以解决这个问题，在这种模式下会有一个单独的返回栈来管理这个 Activity ，不管是哪个应用程序来访问这个 Activity ，都共用的同一个返回栈，也就解决了 Activity 实例的问题。</li>
+</ol>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/Java-Annotation-注解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -318,7 +467,7 @@
         
           
             <blockquote>
-<p>整理来自《疯狂Java》</p>
+<p>整理自《疯狂Java》</p>
 </blockquote>
 <h1 id="Annotation-基本概况"><a href="#Annotation-基本概况" class="headerlink" title="Annotation 基本概况"></a>Annotation 基本概况</h1><ol>
 <li>Annotation 是代码里的特殊标记，这些标记可以在编译、类加载、运行时被读取，并执行响应的处理。</li>
@@ -336,58 +485,50 @@
 <li>@SafeVarargs</li>
 <li>@FunctionInterface</li>
 </ul>
-<h2 id="1-限定重写父类方法：-Override"><a href="#1-限定重写父类方法：-Override" class="headerlink" title="1. 限定重写父类方法：@Override"></a>1. 限定重写父类方法：@Override</h2><ol>
+<ol>
+<li><p>限定重写父类方法：@Override</p>
+<ol>
 <li>@Override 是用来指定方法覆载的，可以强制一个子类必须覆盖父类的方法。</li>
 <li>@Override 的作用是告诉编译器检查这个方法，保证父类要包含一个被该方法重写的方法，否则就会编译出错。</li>
 <li>@Override主要是帮助程序员避免一些低级错误，而给后期排错时造成巨大障碍。</li>
 <li>@Override 只能修饰方法，不能修饰其他程序元素。</li>
-<li>示例代码：   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fruit</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;</div><div class="line">      System.out.println(<span class="string">"水果~"</span>);</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">extends</span> <span class="title">Fruit</span></span>&#123;</div><div class="line">   <span class="comment">// 使用@Override指定下面方法必须重写父类方法   </span></div><div class="line">   <span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;</div><div class="line">      System.out.println(<span class="string">"苹果~"</span>);   </div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>示例代码：   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fruit</span></span>&#123;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;</div><div class="line">   System.out.println(<span class="string">"水果~"</span>);</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">extends</span> <span class="title">Fruit</span></span>&#123;</div><div class="line"><span class="comment">// 使用@Override指定下面方法必须重写父类方法   </span></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span></span>&#123;</div><div class="line">   System.out.println(<span class="string">"苹果~"</span>);   </div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="2-标示已过时：-Deprecated"><a href="#2-标示已过时：-Deprecated" class="headerlink" title="2. 标示已过时：@Deprecated"></a>2. 标示已过时：@Deprecated</h2><ol>
+</li>
+<li><p>标示已过时：@Deprecated</p>
+<ol>
 <li>@Deprecated 用于表示某个程序元素（类、方法等）已过时，当其他程序使用已过时的类、方法时，编译器将会给出警告。</li>
 <li>@Deprecated 的作用于文档注释中过的 @deprecated 标记的作用基本相同，但它们的用法不同，前者是 JDK 5 才支持的注解，无须放在文档注释语法（/<em>*..</em>/部分）中，而是直接用于修饰程序中的程序单元，如方法、类、接口等。</li>
-<li>示例代码，如下程序指定 Apple 中的 info() 方法已过时，其他程序中使用 Apple 类的 info() 方法时编译器将会给出警告。   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span>&#123;</div><div class="line">   <span class="comment">// 定义 info 方法已过时</span></div><div class="line">   <span class="meta">@Deprecated</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span> </span>&#123;</div><div class="line">      System.out.println(<span class="string">"Apple的info方法"</span>);   </div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeprecatedTest</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">      <span class="comment">// 下面使用info()方法时将会被编译器警告</span></div><div class="line">      <span class="keyword">new</span> Apple().info();</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>示例代码，如下程序指定 Apple 中的 info() 方法已过时，其他程序中使用 Apple 类的 info() 方法时编译器将会给出警告。   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apple</span></span>&#123;</div><div class="line"><span class="comment">// 定义 info 方法已过时</span></div><div class="line"><span class="meta">@Deprecated</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">info</span><span class="params">()</span> </span>&#123;</div><div class="line">   System.out.println(<span class="string">"Apple的info方法"</span>);   </div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeprecatedTest</span> </span>&#123;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">   <span class="comment">// 下面使用info()方法时将会被编译器警告</span></div><div class="line">   <span class="keyword">new</span> Apple().info();</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="3-抑制编译器警告：-SuppressWarnings"><a href="#3-抑制编译器警告：-SuppressWarnings" class="headerlink" title="3. 抑制编译器警告：@SuppressWarnings"></a>3. 抑制编译器警告：@SuppressWarnings</h2><ol>
+</li>
+<li><p>抑制编译器警告：@SuppressWarnings</p>
+<ol>
 <li>@SuppressWarnings 指示被该 Annotation 修饰的程序元素（以及该程序元素中的所有子元素）取消显示指定的编译器警告。</li>
 <li>@SuppressWarnings 会一直作用于该程序元素的所有子元素。例如，使用 @SuppressWarnings 修饰某个类取消显示某个编译器警告，同时又修饰该类里的某个方法取消显示另一个编译器警告，那么该方法将会同时取消显示这两个编译器警告。</li>
 <li>当使用 @SuppressWarnings Annotation 来关闭编译器警告时，一定要在括号里使用 name=value 的形式为该 Annotation 的成员变量设置值。 //TODO 如何为Annotation 添加成员变量</li>
 <li><p>示例代码：   </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SuppressWarnings</span>(value=<span class="string">"unchecked"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuppressWarningsTest</span></span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">      List&lt;String&gt; myList = <span class="keyword">new</span> ArrayList(); <span class="comment">// ①</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>程序中的使用 @SuppressWarnings 来关闭 SuppressWarnings 类里的所有编译器警告，编译上面程序时将不会看到任何编译器警告。如果删除 @SuppressWarnings 注解，将会在①处看到编译器警告。</p>
-<h2 id="4-Java-7-的“堆污染”警告与-SafeVarags"><a href="#4-Java-7-的“堆污染”警告与-SafeVarags" class="headerlink" title="4. Java 7 的“堆污染”警告与 @SafeVarags"></a>4. Java 7 的“堆污染”警告与 @SafeVarags</h2></li>
-<li><p>首先了解下堆污染</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">   @SuppressWarnings(value="unchecked")</div><div class="line">   public class SuppressWarningsTest&#123;</div><div class="line">   public static void main(String[] args)&#123;</div><div class="line">      List&lt;String&gt; myList = new ArrayList(); // ①</div><div class="line">   &#125;</div><div class="line">   &#125;</div><div class="line">   ```   </div><div class="line">   程序中的使用 @SuppressWarnings 来关闭 SuppressWarnings 类里的所有编译器警告，编译上面程序时将不会看到任何编译器警告。如果删除 @SuppressWarnings 注解，将会在①处看到编译器警告。</div><div class="line">4. Java 7 的“堆污染”警告与 @SafeVarags</div><div class="line">   1. 先了解下堆污染</div><div class="line">      1. 示例代码：   </div><div class="line">      ```Java</div><div class="line">   List list = new ArrayList&lt;Integer&gt;();  // list未定义泛型</div><div class="line">   List.add(20);  // 添加元素时引发 unchecked 异常</div><div class="line">   // 下面代码引起“未经检查的转换”的警告，编译、运行时完全正常</div><div class="line">   List&lt;String&gt; ls = list;  // ①</div><div class="line">   // 但只要访问 ls 里的元素，如下面代码就会引起运行时异常</div><div class="line">   System.out.prinln(ls.get(0));</div><div class="line">      ```   </div><div class="line">   在上述代码中可能导致运行时异常，Java把引发这种错误的原因称为“堆污染”（Heap pollution），当吧一个不带泛型的对象赋给一个带泛型的变量时，往往就会发生这种“堆污染”，如上①处代码所示。</div><div class="line">      2. 对于形参个数可变的方法，该形参的类型又是泛型，这将更容易导致“堆污染”。例如方法：`public static void faultyMethod(List&lt;String&gt;... listStrArray)`</div><div class="line">      3. 在Java6以及更早的版本中，Java 编译器认为上面的 faultyMethod() 方法完全没有问题，既不会提示错误，也没有提示警告。等到使用该方法时，将会引发一个 unchecked 警告。</div><div class="line">      4. 从 Java7 开始，Java 编译器将会进行更严格的检查，Java 编译器在编译 ErrorUtils 时就会发出警告，保证开发者更早地注意到程序中可能存在的漏洞。</div><div class="line">   2. @SuppressWarnings   </div><div class="line">      1. 在有些时候，开发者不希望看到这个警告，则可以使用如下三种方式来“抑制”这个警告</div><div class="line">         - 使用 @SafeVarargs 修饰引发该警告的方法或构造器。</div><div class="line">         - 使用 @SuppressWarnings("unchecked") 修饰。</div><div class="line">         - 编译时使用 -Xlint:varargs 选项。</div><div class="line">      2. 第三种方式比较少用，通常可以选择第一种或第二种方式，尤其是使用 @SafeVarargs 修饰引发该警告的方法或构造器，它是 Java7 专门为抑制“堆污染”警告提供的。如果使用 @SafeVarargs 修饰上述的 faultyMethod() 方法，将不会发出任何警告。 </div><div class="line">5. Java 8 的函数式接口与 @FunctionInterface</div><div class="line">   1. Java 8 规定：如果接口中只有一个抽象方法（可以包含多个默认方法或多个 static 方法），该接口就是函数式接口。</div><div class="line">   2. @FunctionalInterface 是用来指定某个接口必须是函数式接口。主要是帮助程序员避免一些低级错误。</div><div class="line">   3. @FunctionalInterface 只能修饰接口，不能修饰其他程序元素。</div><div class="line">   3. 示例代码：   </div><div class="line">   ```java</div><div class="line">@FunctionalInterface</div><div class="line">public interface FunInterface</div><div class="line">&#123;</div><div class="line">   static void foo()&#123;</div><div class="line">      System.out.println("foo类方法");</div><div class="line">   &#125;</div><div class="line">   default void bar()&#123; </div><div class="line">      System.out.println("bar默认方法");</div><div class="line">   &#125;</div><div class="line">   void test(); // 只定义一个抽象方法</div><div class="line">&#125;</div><div class="line">   ```   </div><div class="line">   编译上面程序，可能丝毫看不出程序中的 @FunctionalInterface 有何作用，因为 @FunctionalInterface 只是告诉编译器检查这个接口，保证该接口只能包含一个抽象方法，否则就会岁编译出错。</div><div class="line"></div><div class="line"># JDK 的元 Annotation</div><div class="line"></div><div class="line">JDK 除了在 java.lang 下提供了5个基本的 Annotation 之外，还在 java.lang.annotation 包下提供了6个 Meta Annotation（元 Annotation），其中有5个元 Annotation 都用于**修饰其他的 Annotation 定义**。其中的 @Repeatable 专门用于定义 Java 8 新增的重复注解。</div><div class="line"></div><div class="line">1. 使用@Retention</div><div class="line">   1. @Retention 只能用于修饰 Annotation 定义，用于指定被修饰的 Annotation 可以保留多长时间。</div><div class="line">   2. @Retention 包含一个 RetentionPolicy 类型的 value 成员变量，使用 @Retention 时必须为该 value 成员变量指定值。value 成员变量的值只能是如下三个：</div><div class="line">      - RententionPolicy.CLASS：编译器将把 Annotation 记录在 class 文件中。当运行 Java 程序时，JVM **不可获取** Annotation 信息。这是默认值。</div><div class="line">      - RetentionPolicy.RUNTIME：编译器将把 Annotation 记录在 class 文件中。当运行 Java 程序时，JVM **可获取** Annotation 信息，程序可以通过反射获取该 Annotation 信息。</div><div class="line">      - RetentionPolicy.SOURCE：Annotation 只保留在源代码中，**编译器直接丢弃**这种 Annotation 。</div><div class="line">   3. 示例代码：</div><div class="line">      1. 如果需要通过反射获取注解信息，就需要使用 value 属性值为 RetentionPolicy.RUNTIME 的 @Retention。使用 @Retention 元 Annotation 可采用如下代码为 value 指定值。    </div><div class="line">      ```Java</div><div class="line">@Retention(value = RetentionPolicy.RUNTIME)</div><div class="line">public @interface Testable()</div><div class="line">      ```   </div><div class="line">也可采用如下代码来为 value 指定值。   </div><div class="line">```Java</div><div class="line">@Retention(RetentionPolicy.SOURCE)</div><div class="line">public @interface Testable()</div></pre></td></tr></table></figure>
 <ol>
-<li>示例代码：   <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">List list = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();  <span class="comment">// list未定义泛型</span></div><div class="line">List.add(<span class="number">20</span>);  <span class="comment">// 添加元素时引发 unchecked 异常</span></div><div class="line"><span class="comment">// 下面代码引起“未经检查的转换”的警告，编译、运行时完全正常</span></div><div class="line">List&lt;String&gt; ls = list;  <span class="comment">// ①</span></div><div class="line"><span class="comment">// 但只要访问 ls 里的元素，如下面代码就会引起运行时异常</span></div><div class="line">System.out.prinln(ls.get(<span class="number">0</span>));</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>在上述代码中可能导致运行时异常，Java把引发这种错误的原因称为“堆污染”（Heap pollution），当吧一个不带泛型的对象赋给一个带泛型的变量时，往往就会发生这种“堆污染”，如上①处代码所示。</p>
-<ol>
-<li>对于形参个数可变的方法，该形参的类型又是泛型，这将更容易导致“堆污染”。例如方法：<code>public static void faultyMethod(List&lt;String&gt;... listStrArray)</code></li>
-<li>在Java6以及更早的版本中，Java 编译器认为上面的 faultyMethod() 方法完全没有问题，既不会提示错误，也没有提示警告。等到使用该方法时，将会引发一个 unchecked 警告。</li>
-<li>从 Java7 开始，Java 编译器将会进行更严格的检查，Java 编译器在编译 ErrorUtils 时就会发出警告，保证开发者更早地注意到程序中可能存在的漏洞。</li>
-</ol>
-</li>
-<li>@SuppressWarnings   <ol>
-<li>在有些时候，开发者不希望看到这个警告，则可以使用如下三种方式来“抑制”这个警告<ul>
-<li>使用 @SafeVarargs 修饰引发该警告的方法或构造器。</li>
-<li>使用 @SuppressWarnings(“unchecked”) 修饰。</li>
-<li>编译时使用 -Xlint:varargs 选项。</li>
-</ul>
-</li>
-<li>第三种方式比较少用，通常可以选择第一种或第二种方式，尤其是使用 @SafeVarargs 修饰引发该警告的方法或构造器，它是 Java7 专门为抑制“堆污染”警告提供的。如果使用 @SafeVarargs 修饰上述的 faultyMethod() 方法，将不会发出任何警告。 <h2 id="5-Java-8-的函数式接口与-FunctionInterface"><a href="#5-Java-8-的函数式接口与-FunctionInterface" class="headerlink" title="5. Java 8 的函数式接口与 @FunctionInterface"></a>5. Java 8 的函数式接口与 @FunctionInterface</h2></li>
+<li>上面第二段代码中使用 @Retention 元 Annotation 时，并未通过value=RetentionPolicy.SOURCE 的方式来为该成员变量指定值，这是因为当 Annotation 的成员变量名为 value 时，程序中可以直接在 Annotation 后的括号里指定该成员变量的值，无需使用 name=value的形式。</li>
+<li>Tip：如果使用注解时只需要为 value 成员变量指定值，则使用该注解时可以直接在该注解后的括号里指定 value 成员变量的值，无须使用“value=变量值”的形式。</li>
 </ol>
 </li>
 </ol>
-<h1 id="JDK-的元-Annotation"><a href="#JDK-的元-Annotation" class="headerlink" title="JDK 的元 Annotation"></a>JDK 的元 Annotation</h1><ol>
-<li>使用@Retention</li>
+</li>
 <li>使用@Target</li>
 <li>使用@Document</li>
 <li>使用@Inherited</li>
 </ol>
-<h1 id="自定义-Annotation"><a href="#自定义-Annotation" class="headerlink" title="自定义 Annotation"></a>自定义 Annotation</h1><h2 id="定义-Annotation"><a href="#定义-Annotation" class="headerlink" title="定义 Annotation"></a>定义 Annotation</h2><h2 id="提取-Annotation-信息"><a href="#提取-Annotation-信息" class="headerlink" title="提取 Annotation 信息"></a>提取 Annotation 信息</h2>
+<h1 id="自定义-Annotation"><a href="#自定义-Annotation" class="headerlink" title="自定义 Annotation"></a>自定义 Annotation</h1><ol>
+<li><p>定义 Annotation</p>
+</li>
+<li><p>提取 Annotation 信息</p>
+</li>
+</ol>
+
           
         
       
@@ -714,7 +855,7 @@
 <li>该文件夹用于存放Hexo工具，以及以后写的博文也会先在这个文件夹中进行编辑）</li>
 </ul>
 </li>
-<li>进入该文件夹，右键 -&gt; Git Bash Here 打开 Git，输入命令 <code>$ npm install -g hexo</code>，根据网络情况，可能需要等到一段时间，安装成功，Git 界面如下图所示。<br><img src="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7g8hz1jcj20g509ygm1.jpg" alt=""></li>
+<li>进入该文件夹，右键 -&gt; Git Bash Here 打开 Git，输入命令 <code>$ npm install -g hexo</code>，根据网络情况，可能需要等到一段时间，安装成功，Git 界面如下图所示。<br>输入命令之后的界面：<br><img src="http://ww1.sinaimg.cn/large/9f1104fcgy1fif0avgraoj20g508y0t7.jpg" alt=""><br>安装完成的界面：<br><img src="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7g8hz1jcj20g509ygm1.jpg" alt=""></li>
 <li>接下来输入命令 <code>$ hexo init</code> 回车运行，Hexo会在目标文件夹建立网站所需要的所有文件。同样根据网络情况，可能需要等待一段时间，才能完成。<br>初始化成功后，Git 界面如下图所示。<br><img src="http://ww1.sinaimg.cn/large/9f1104fcgy1ff7gg3eauhj20g509yjrt.jpg" alt=""></li>
 <li>现在已经搭建起了一个本地博客，输入一下命令进行验证<ol>
 <li><code>$ hexo g</code> 生成博客</li>
@@ -802,8 +943,14 @@
 </ol>
 <h2 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h2><ol>
 <li>以后发布博客只需要三步：<ol>
-<li>hexo new “postname” 新建并编写博文，</li>
-<li>hexo g 生成博客</li>
+<li>hexo new “postname” <ul>
+<li>新建并编写博文，</li>
+</ul>
+</li>
+<li>hexo g<ul>
+<li>生成博客</li>
+</ul>
+</li>
 <li>双击 deploy.sh 脚本文件，输入账号密码即可完成发布。</li>
 </ol>
 </li>
@@ -955,7 +1102,7 @@
 </ul>
 </li>
 <li>查看配置信息<ul>
-<li>$ git config –list</li>
+<li>$ git config --list</li>
 <li>直接查阅某个环境变量的设定，只要把特定的名字跟在后面即可，<br>eg. $ git config user.name  </li>
 </ul>
 </li>
@@ -1294,7 +1441,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1307,7 +1454,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
