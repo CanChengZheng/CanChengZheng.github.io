@@ -240,6 +240,169 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/08/海量数据处理面试题-算法分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZCC">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/22211624?v=3&u=6caf3b6c049755ce7c1df157d158a088f344cc65&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CC">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/08/海量数据处理面试题-算法分析/" itemprop="url">
+                  海量数据处理面试题 算法分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T19:50:07+08:00">
+                2017-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>参考文章<a href="http://blog.csdn.net/v_july_v/article/details/6279498" target="_blank" rel="external">《十道海量数据处理面试题与十个方法大总结》</a></p>
+</blockquote>
+<h1 id="题目概要"><a href="#题目概要" class="headerlink" title="题目概要"></a>题目概要</h1><ol>
+<li>海量日志数据，提取出某日访问百度<strong>次数最多</strong>的那个IP。</li>
+</ol>
+<p><strong>分而治之+Hash_map</strong>    </p>
+<ol>
+<li>搜索引擎会通过日志文件把用户每次检索使用的所有检索串都记录下来，每个查询串的长度为1-255字节，统计<strong>最热门</strong>的10个查询串。<br>问题描述：假设目前有一千万个记录（这些查询串的重复度比较高，虽然总数是1千万，但如果除去重复后，不超过3百万个。一个查询串的重复度越高，说明查询它的用户越多，也就是越热门。），请你统计最热门的10个查询串，要求使用的内存不能超过1G。</li>
+</ol>
+<p><strong>分而治之+hash_map+最小堆</strong></p>
+<ol>
+<li>有一个1G大小的一个文件，里面每一行是一个词，词的大小不超过16字节，内存限制大小是1M。返回频数最高的100个词。</li>
+</ol>
+<p><strong>分而治之+hash_map+最小堆</strong></p>
+<ol>
+<li>有10个文件，每个文件1G，每个文件的每一行存放的都是用户的query，每个文件的query都可能重复。要求你按照query的频度排序。</li>
+</ol>
+<p><strong>分而治之+hash_map+归并排序</strong></p>
+<ol>
+<li>给定a、b两个文件，各存放50亿个url，每个url各占64字节，内存限制是4G，让你找出a、b文件共同的url？</li>
+</ol>
+<p><strong>分而治之+hash_set</strong></p>
+<ol>
+<li>在2.5亿个整数中找出不重复的整数，注，内存不足以容纳这2.5亿个整数。</li>
+</ol>
+<p><strong>2-bitmap</strong></p>
+<ol>
+<li>腾讯面试题：给40亿个不重复的unsigned int的整数，没排过序的，然后再给一个数，如何快速判断这个数是否在那40亿个数当中？</li>
+</ol>
+<p><strong>2-bitmap</strong></p>
+<ol>
+<li>怎么在海量数据中找出重复次数最多的一个？</li>
+</ol>
+<p><strong>分而治之+hash_map</strong></p>
+<ol>
+<li>上千万或上亿数据（有重复），统计其中出现次数最多的钱N个数据。</li>
+</ol>
+<p><strong>分而治之+hash_map+最小堆</strong></p>
+<ol>
+<li>一个文本文件，大约有一万行，每行一个词，要求统计出其中最频繁出现的前10个词，请给出思想，给出时间复杂度分析。</li>
+</ol>
+<p><strong>分而治之+hash_map+最小堆</strong></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/Android-Activity-的四种启动模式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -510,7 +673,7 @@
 <li>@SuppressWarnings 会一直作用于该程序元素的所有子元素。例如，使用 @SuppressWarnings 修饰某个类取消显示某个编译器警告，同时又修饰该类里的某个方法取消显示另一个编译器警告，那么该方法将会同时取消显示这两个编译器警告。</li>
 <li>当使用 @SuppressWarnings Annotation 来关闭编译器警告时，一定要在括号里使用 name=value 的形式为该 Annotation 的成员变量设置值。 //TODO 如何为Annotation 添加成员变量</li>
 <li><p>示例代码：   </p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">   @SuppressWarnings(value="unchecked")</div><div class="line">   public class SuppressWarningsTest&#123;</div><div class="line">   public static void main(String[] args)&#123;</div><div class="line">      List&lt;String&gt; myList = new ArrayList(); // ①</div><div class="line">   &#125;</div><div class="line">   &#125;</div><div class="line">   ```   </div><div class="line">   程序中的使用 @SuppressWarnings 来关闭 SuppressWarnings 类里的所有编译器警告，编译上面程序时将不会看到任何编译器警告。如果删除 @SuppressWarnings 注解，将会在①处看到编译器警告。</div><div class="line">4. Java 7 的“堆污染”警告与 @SafeVarags</div><div class="line">   1. 先了解下堆污染</div><div class="line">      1. 示例代码：   </div><div class="line">      ```Java</div><div class="line">   List list = new ArrayList&lt;Integer&gt;();  // list未定义泛型</div><div class="line">   List.add(20);  // 添加元素时引发 unchecked 异常</div><div class="line">   // 下面代码引起“未经检查的转换”的警告，编译、运行时完全正常</div><div class="line">   List&lt;String&gt; ls = list;  // ①</div><div class="line">   // 但只要访问 ls 里的元素，如下面代码就会引起运行时异常</div><div class="line">   System.out.prinln(ls.get(0));</div><div class="line">      ```   </div><div class="line">   在上述代码中可能导致运行时异常，Java把引发这种错误的原因称为“堆污染”（Heap pollution），当吧一个不带泛型的对象赋给一个带泛型的变量时，往往就会发生这种“堆污染”，如上①处代码所示。</div><div class="line">      2. 对于形参个数可变的方法，该形参的类型又是泛型，这将更容易导致“堆污染”。例如方法：`public static void faultyMethod(List&lt;String&gt;... listStrArray)`</div><div class="line">      3. 在Java6以及更早的版本中，Java 编译器认为上面的 faultyMethod() 方法完全没有问题，既不会提示错误，也没有提示警告。等到使用该方法时，将会引发一个 unchecked 警告。</div><div class="line">      4. 从 Java7 开始，Java 编译器将会进行更严格的检查，Java 编译器在编译 ErrorUtils 时就会发出警告，保证开发者更早地注意到程序中可能存在的漏洞。</div><div class="line">   2. @SuppressWarnings   </div><div class="line">      1. 在有些时候，开发者不希望看到这个警告，则可以使用如下三种方式来“抑制”这个警告</div><div class="line">         - 使用 @SafeVarargs 修饰引发该警告的方法或构造器。</div><div class="line">         - 使用 @SuppressWarnings("unchecked") 修饰。</div><div class="line">         - 编译时使用 -Xlint:varargs 选项。</div><div class="line">      2. 第三种方式比较少用，通常可以选择第一种或第二种方式，尤其是使用 @SafeVarargs 修饰引发该警告的方法或构造器，它是 Java7 专门为抑制“堆污染”警告提供的。如果使用 @SafeVarargs 修饰上述的 faultyMethod() 方法，将不会发出任何警告。 </div><div class="line">5. Java 8 的函数式接口与 @FunctionInterface</div><div class="line">   1. Java 8 规定：如果接口中只有一个抽象方法（可以包含多个默认方法或多个 static 方法），该接口就是函数式接口。</div><div class="line">   2. @FunctionalInterface 是用来指定某个接口必须是函数式接口。主要是帮助程序员避免一些低级错误。</div><div class="line">   3. @FunctionalInterface 只能修饰接口，不能修饰其他程序元素。</div><div class="line">   3. 示例代码：   </div><div class="line">   ```java</div><div class="line">@FunctionalInterface</div><div class="line">public interface FunInterface</div><div class="line">&#123;</div><div class="line">   static void foo()&#123;</div><div class="line">      System.out.println("foo类方法");</div><div class="line">   &#125;</div><div class="line">   default void bar()&#123; </div><div class="line">      System.out.println("bar默认方法");</div><div class="line">   &#125;</div><div class="line">   void test(); // 只定义一个抽象方法</div><div class="line">&#125;</div><div class="line">   ```   </div><div class="line">   编译上面程序，可能丝毫看不出程序中的 @FunctionalInterface 有何作用，因为 @FunctionalInterface 只是告诉编译器检查这个接口，保证该接口只能包含一个抽象方法，否则就会岁编译出错。</div><div class="line"></div><div class="line"># JDK 的元 Annotation</div><div class="line"></div><div class="line">JDK 除了在 java.lang 下提供了5个基本的 Annotation 之外，还在 java.lang.annotation 包下提供了6个 Meta Annotation（元 Annotation），其中有5个元 Annotation 都用于**修饰其他的 Annotation 定义**。其中的 @Repeatable 专门用于定义 Java 8 新增的重复注解。</div><div class="line"></div><div class="line">1. 使用@Retention</div><div class="line">   1. @Retention 只能用于修饰 Annotation 定义，用于指定被修饰的 Annotation 可以保留多长时间。</div><div class="line">   2. @Retention 包含一个 RetentionPolicy 类型的 value 成员变量，使用 @Retention 时必须为该 value 成员变量指定值。value 成员变量的值只能是如下三个：</div><div class="line">      - RententionPolicy.CLASS：编译器将把 Annotation 记录在 class 文件中。当运行 Java 程序时，JVM **不可获取** Annotation 信息。这是默认值。</div><div class="line">      - RetentionPolicy.RUNTIME：编译器将把 Annotation 记录在 class 文件中。当运行 Java 程序时，JVM **可获取** Annotation 信息，程序可以通过反射获取该 Annotation 信息。</div><div class="line">      - RetentionPolicy.SOURCE：Annotation 只保留在源代码中，**编译器直接丢弃**这种 Annotation 。</div><div class="line">   3. 示例代码：</div><div class="line">      1. 如果需要通过反射获取注解信息，就需要使用 value 属性值为 RetentionPolicy.RUNTIME 的 @Retention。使用 @Retention 元 Annotation 可采用如下代码为 value 指定值。    </div><div class="line">      ```Java</div><div class="line">@Retention(value = RetentionPolicy.RUNTIME)</div><div class="line">public @interface Testable()</div><div class="line">      ```   </div><div class="line">也可采用如下代码来为 value 指定值。   </div><div class="line">```Java</div><div class="line">@Retention(RetentionPolicy.SOURCE)</div><div class="line">public @interface Testable()</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">   @SuppressWarnings(value="unchecked")</div><div class="line">   public class SuppressWarningsTest&#123;</div><div class="line">   public static void main(String[] args)&#123;</div><div class="line">      List&lt;String&gt; myList = new ArrayList(); // ①</div><div class="line">   &#125;</div><div class="line">   &#125;</div><div class="line">   ```   </div><div class="line">程序中的使用 @SuppressWarnings 来关闭 SuppressWarnings 类里的所有编译器警告，编译上面程序时将不会看到任何编译器警告。如果删除 @SuppressWarnings 注解，将会在①处看到编译器警告。</div><div class="line">4. Java 7 的“堆污染”警告与 @SafeVarags</div><div class="line">   1. 先了解下堆污染</div><div class="line">      1. 示例代码：   </div><div class="line">      ```Java</div><div class="line">   List list = new ArrayList&lt;Integer&gt;();  // list未定义泛型</div><div class="line">   List.add(20);  // 添加元素时引发 unchecked 异常</div><div class="line">   // 下面代码引起“未经检查的转换”的警告，编译、运行时完全正常</div><div class="line">   List&lt;String&gt; ls = list;  // ①</div><div class="line">   // 但只要访问 ls 里的元素，如下面代码就会引起运行时异常</div><div class="line">   System.out.prinln(ls.get(0));</div><div class="line">      ```   </div><div class="line">   在上述代码中可能导致运行时异常，Java把引发这种错误的原因称为“堆污染”（Heap pollution），当吧一个不带泛型的对象赋给一个带泛型的变量时，往往就会发生这种“堆污染”，如上①处代码所示。</div><div class="line">      2. 对于形参个数可变的方法，该形参的类型又是泛型，这将更容易导致“堆污染”。例如方法：`public static void faultyMethod(List&lt;String&gt;... listStrArray)`</div><div class="line">      3. 在Java6以及更早的版本中，Java 编译器认为上面的 faultyMethod() 方法完全没有问题，既不会提示错误，也没有提示警告。等到使用该方法时，将会引发一个 unchecked 警告。</div><div class="line">      4. 从 Java7 开始，Java 编译器将会进行更严格的检查，Java 编译器在编译 ErrorUtils 时就会发出警告，保证开发者更早地注意到程序中可能存在的漏洞。</div><div class="line">   2. @SuppressWarnings   </div><div class="line">      1. 在有些时候，开发者不希望看到这个警告，则可以使用如下三种方式来“抑制”这个警告</div><div class="line">         - 使用 @SafeVarargs 修饰引发该警告的方法或构造器。</div><div class="line">         - 使用 @SuppressWarnings("unchecked") 修饰。</div><div class="line">         - 编译时使用 -Xlint:varargs 选项。</div><div class="line">      2. 第三种方式比较少用，通常可以选择第一种或第二种方式，尤其是使用 @SafeVarargs 修饰引发该警告的方法或构造器，它是 Java7 专门为抑制“堆污染”警告提供的。如果使用 @SafeVarargs 修饰上述的 faultyMethod() 方法，将不会发出任何警告。 </div><div class="line">5. Java 8 的函数式接口与 @FunctionInterface</div><div class="line">   1. Java 8 规定：如果接口中只有一个抽象方法（可以包含多个默认方法或多个 static 方法），该接口就是函数式接口。</div><div class="line">   2. @FunctionalInterface 是用来指定某个接口必须是函数式接口。主要是帮助程序员避免一些低级错误。</div><div class="line">   3. @FunctionalInterface 只能修饰接口，不能修饰其他程序元素。</div><div class="line">   3. 示例代码：   </div><div class="line">   ```java</div><div class="line">@FunctionalInterface</div><div class="line">public interface FunInterface</div><div class="line">&#123;</div><div class="line">   static void foo()&#123;</div><div class="line">      System.out.println("foo类方法");</div><div class="line">   &#125;</div><div class="line">   default void bar()&#123; </div><div class="line">      System.out.println("bar默认方法");</div><div class="line">   &#125;</div><div class="line">   void test(); // 只定义一个抽象方法</div><div class="line">&#125;</div><div class="line">   ```   </div><div class="line">   编译上面程序，可能丝毫看不出程序中的 @FunctionalInterface 有何作用，因为 @FunctionalInterface 只是告诉编译器检查这个接口，保证该接口只能包含一个抽象方法，否则就会岁编译出错。</div><div class="line"></div><div class="line"># JDK 的元 Annotation</div><div class="line"></div><div class="line">JDK 除了在 java.lang 下提供了5个基本的 Annotation 之外，还在 java.lang.annotation 包下提供了6个 Meta Annotation（元 Annotation），其中有5个元 Annotation 都用于**修饰其他的 Annotation 定义**。其中的 @Repeatable 专门用于定义 Java 8 新增的重复注解。</div><div class="line"></div><div class="line">1. 使用@Retention</div><div class="line">   1. @Retention 只能用于修饰 Annotation 定义，用于指定被修饰的 Annotation 可以保留多长时间。</div><div class="line">   2. @Retention 包含一个 RetentionPolicy 类型的 value 成员变量，使用 @Retention 时必须为该 value 成员变量指定值。value 成员变量的值只能是如下三个：</div><div class="line">      - RententionPolicy.CLASS：编译器将把 Annotation 记录在 class 文件中。当运行 Java 程序时，JVM **不可获取** Annotation 信息。这是默认值。</div><div class="line">      - RetentionPolicy.RUNTIME：编译器将把 Annotation 记录在 class 文件中。当运行 Java 程序时，JVM **可获取** Annotation 信息，程序可以通过反射获取该 Annotation 信息。</div><div class="line">      - RetentionPolicy.SOURCE：Annotation 只保留在源代码中，**编译器直接丢弃**这种 Annotation 。</div><div class="line">   3. 示例代码：</div><div class="line">      1. 如果需要通过反射获取注解信息，就需要使用 value 属性值为 RetentionPolicy.RUNTIME 的 @Retention。使用 @Retention 元 Annotation 可采用如下代码为 value 指定值。    </div><div class="line">      ```Java</div><div class="line">@Retention(value = RetentionPolicy.RUNTIME)</div><div class="line">public @interface Testable()</div><div class="line">      ```   </div><div class="line">也可采用如下代码来为 value 指定值。   </div><div class="line">```Java</div><div class="line">@Retention(RetentionPolicy.SOURCE)</div><div class="line">public @interface Testable()</div></pre></td></tr></table></figure>
 <ol>
 <li>上面第二段代码中使用 @Retention 元 Annotation 时，并未通过value=RetentionPolicy.SOURCE 的方式来为该成员变量指定值，这是因为当 Annotation 的成员变量名为 value 时，程序中可以直接在 Annotation 后的括号里指定该成员变量的值，无需使用 name=value的形式。</li>
 <li>Tip：如果使用注解时只需要为 value 成员变量指定值，则使用该注解时可以直接在该注解后的括号里指定 value 成员变量的值，无须使用“value=变量值”的形式。</li>
@@ -1441,7 +1604,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1454,7 +1617,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
