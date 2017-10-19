@@ -94,7 +94,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/10/08/海量数据处理面试题-算法分析/index.html">
 <meta property="og:site_name" content="CC">
 <meta property="og:description" content="参考文章《十道海量数据处理面试题与十个方法大总结》  题目概要 海量日志数据，提取出某日访问百度次数最多的那个IP。  分而治之+Hash_map      搜索引擎会通过日志文件把用户每次检索使用的所有检索串都记录下来，每个查询串的长度为1-255字节，统计最热门的10个查询串。问题描述：假设目前有一千万个记录（这些查询串的重复度比较高，虽然总数是1千万，但如果除去重复后，不超过3百万个。一个">
-<meta property="og:updated_time" content="2017-10-09T06:14:52.575Z">
+<meta property="og:updated_time" content="2017-10-11T13:51:14.502Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="海量数据处理面试题 算法分析">
 <meta name="twitter:description" content="参考文章《十道海量数据处理面试题与十个方法大总结》  题目概要 海量日志数据，提取出某日访问百度次数最多的那个IP。  分而治之+Hash_map      搜索引擎会通过日志文件把用户每次检索使用的所有检索串都记录下来，每个查询串的长度为1-255字节，统计最热门的10个查询串。问题描述：假设目前有一千万个记录（这些查询串的重复度比较高，虽然总数是1千万，但如果除去重复后，不超过3百万个。一个">
@@ -336,15 +336,12 @@
 </ol>
 <p><strong>分而治之+hash_set</strong></p>
 <ol>
-<li>在2.5亿个整数中找出不重复的整数，注，内存不足以容纳这2.5亿个整数。</li>
-</ol>
-<p><strong>2-bitmap</strong></p>
-<ol>
-<li>腾讯面试题：给40亿个不重复的unsigned int的整数，没排过序的，然后再给一个数，如何快速判断这个数是否在那40亿个数当中？</li>
-</ol>
-<p><strong>2-bitmap</strong></p>
-<ol>
-<li>怎么在海量数据中找出重复次数最多的一个？</li>
+<li><p>在2.5亿个整数中找出不重复的整数，注，内存不足以容纳这2.5亿个整数。</p>
+</li>
+<li><p>腾讯面试题：给40亿个不重复的unsigned int的整数，没排过序的，然后再给一个数，如何快速判断这个数是否在那40亿个数当中？</p>
+</li>
+<li><p>怎么在海量数据中找出重复次数最多的一个？</p>
+</li>
 </ol>
 <p><strong>分而治之+hash_map</strong></p>
 <ol>
@@ -355,6 +352,18 @@
 <li>一个文本文件，大约有一万行，每行一个词，要求统计出其中最频繁出现的前10个词，请给出思想，给出时间复杂度分析。</li>
 </ol>
 <p><strong>分而治之+hash_map+最小堆</strong></p>
+<h1 id="题目解析"><a href="#题目解析" class="headerlink" title="题目解析"></a>题目解析</h1><ol>
+<li>上面的 10 道题大致可以分为几种操作方式<ol>
+<li>一种是使用<code>N-bitmap</code>对数据进行标记处理（每个数使用 N 个bit进行标记，N取决与实际问题）</li>
+<li>另一种则首先是使用分而治之的思想，将通过<code>hash函数</code>计算并求模的方式，将问题的规模进行缩小，再对问题进行逻辑处理</li>
+</ol>
+</li>
+<li>其中 6、7 题即可使用2-bitmap的方式进行处理<ol>
+<li>第六题：每个数采用<code>2-bitmap</code>进行标记，未出现过标记为00，第一次出现标记为01，多次出现标记为10。因整数类型32位，所以总共可以表示2^32个数值，因而需要 2^32 * 2 bit，即申请总共1GB的内存来进行统计。接下来通过遍历数值，查看bitmap对应的位置数值：如果是00，则变为01；01则变为10；10则维持不变。最后遍历 bitmap，对标记为10的数值进行输出。</li>
+<li>第七题：因为只需要判定是否存在，所以只需要使用<code>1-bitmap</code>进行标记，未出现过标记为0，出现过标记为1。因此需要 2^32 * 1 bit，即申请 512MB 的内存空间进行统计。接下来通过扫描数据，在bitmap中对应的值置为1。接下来扫描bitmap，查找标记为 0 的数值即可。（第七题也有其他更高效的解法，见后续 //TODO）</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -525,7 +534,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目概要"><span class="nav-number">1.</span> <span class="nav-text">题目概要</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目概要"><span class="nav-number">1.</span> <span class="nav-text">题目概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目解析"><span class="nav-number">2.</span> <span class="nav-text">题目解析</span></a></li></ol></div>
             
 
           </div>
