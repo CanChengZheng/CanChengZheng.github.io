@@ -87,17 +87,17 @@
 
 
 
-<meta name="description" content="整理自《第一行代码——Android（第2版）》Activity的四种启动模式和onNewIntent()  Activity 的启动模式 在实际项目中我们可能由于特定的需求为每个 Activity 指定恰当的启动模式。 Activity 的启动模式一共有4种，分别是 standard、singleTop、singleTask 和 singleInstance。 启动模式的配置：通过在 Andr">
+<meta name="description" content="Value Description     mcc The IMSI mobile country code (MCC) has changed — that is, a SIM hasbeen detected and updated the MCC.移动国家号码，由三位数字组成，每个国家都有自己独立的MCC，可以识别手机用户所属国家。   mnc The IMSI mobile netw">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Activity 的四种启动模式">
-<meta property="og:url" content="http://yoursite.com/2017/08/10/Android-Activity-的四种启动模式/index.html">
+<meta property="og:title" content="Activity 中 ConfigChanges 属性的用法">
+<meta property="og:url" content="http://yoursite.com/2017/10/25/Activity-中-ConfigChanges-属性的用法/index.html">
 <meta property="og:site_name" content="CC">
-<meta property="og:description" content="整理自《第一行代码——Android（第2版）》Activity的四种启动模式和onNewIntent()  Activity 的启动模式 在实际项目中我们可能由于特定的需求为每个 Activity 指定恰当的启动模式。 Activity 的启动模式一共有4种，分别是 standard、singleTop、singleTask 和 singleInstance。 启动模式的配置：通过在 Andr">
-<meta property="og:updated_time" content="2017-11-30T09:32:46.545Z">
+<meta property="og:description" content="Value Description     mcc The IMSI mobile country code (MCC) has changed — that is, a SIM hasbeen detected and updated the MCC.移动国家号码，由三位数字组成，每个国家都有自己独立的MCC，可以识别手机用户所属国家。   mnc The IMSI mobile netw">
+<meta property="og:updated_time" content="2017-11-30T08:46:50.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Activity 的四种启动模式">
-<meta name="twitter:description" content="整理自《第一行代码——Android（第2版）》Activity的四种启动模式和onNewIntent()  Activity 的启动模式 在实际项目中我们可能由于特定的需求为每个 Activity 指定恰当的启动模式。 Activity 的启动模式一共有4种，分别是 standard、singleTop、singleTask 和 singleInstance。 启动模式的配置：通过在 Andr">
+<meta name="twitter:title" content="Activity 中 ConfigChanges 属性的用法">
+<meta name="twitter:description" content="Value Description     mcc The IMSI mobile country code (MCC) has changed — that is, a SIM hasbeen detected and updated the MCC.移动国家号码，由三位数字组成，每个国家都有自己独立的MCC，可以识别手机用户所属国家。   mnc The IMSI mobile netw">
 
 
 
@@ -125,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/08/10/Android-Activity-的四种启动模式/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/25/Activity-中-ConfigChanges-属性的用法/"/>
 
 
 
 
 
-  <title> Activity 的四种启动模式 | CC </title>
+  <title> Activity 中 ConfigChanges 属性的用法 | CC </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -240,7 +240,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/Android-Activity-的四种启动模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/Activity-中-ConfigChanges-属性的用法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZCC">
@@ -261,7 +261,7 @@
             
             
               
-                Activity 的四种启动模式
+                Activity 中 ConfigChanges 属性的用法
               
             
           </h1>
@@ -276,8 +276,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T22:43:05+08:00">
-                2017-08-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T18:43:46+08:00">
+                2017-10-25
               </time>
             
 
@@ -312,35 +312,53 @@
       
 
       
-        <blockquote>
-<p>整理自《第一行代码——Android（第2版）》<br><a href="http://blog.csdn.net/linghu_java/article/details/17266603" target="_blank" rel="external">Activity的四种启动模式和onNewIntent()</a></p>
-</blockquote>
-<h1 id="Activity-的启动模式"><a href="#Activity-的启动模式" class="headerlink" title="Activity 的启动模式"></a>Activity 的启动模式</h1><ol>
-<li>在实际项目中我们可能由于特定的需求为每个 Activity 指定恰当的启动模式。</li>
-<li>Activity 的启动模式一共有4种，分别是 <code>standard</code>、<code>singleTop</code>、<code>singleTask</code> 和 <code>singleInstance</code>。</li>
-<li><strong>启动模式的配置</strong>：通过在 AndroidManifest.xml 中通过给 <activity> 标签指定 android:launchMode 属性来配置启动模式。</activity></li>
-</ol>
-<h1 id="Standard"><a href="#Standard" class="headerlink" title="Standard"></a>Standard</h1><ol>
-<li><code>standard</code> 是 Activity <strong>默认的启动模式</strong>，在不进行显式指定的情况下，所有 Activity 都会自动使用这种启动模式。</li>
-<li>我们知道 Android 是使用返回栈来管理 Activity 。对于使用 <code>standard</code> 模式的 Activity，系统不会在乎这个 Activity 是否已经存在于返回栈中，每次启动都会创建该 Activity 的一个新的实例。每当启动一个新的 Activity，它就会在返回栈中入栈，并处于栈顶的位置。</li>
-</ol>
-<h1 id="singleTop"><a href="#singleTop" class="headerlink" title="singleTop"></a>singleTop</h1><ol>
-<li>当 Activity 的启动模式指定为 <code>singleTop</code>，在启动 Activity 时如果发现返回栈的<strong>栈顶</strong>已经是该 Activity，则认为可以直接使用它，不会再创建新的 Activity 实例。</li>
-<li>而当启动模式为 <code>singleTop</code> 的 Activity 已经存在于返回栈中，但并不位于栈顶，此时再启动该 Activity ，还是会创建新的实例。</li>
-<li>根据第 2 点可以看出，<code>singleTop</code> 模式可能存在的问题是，如果该 Activity 并没有处于栈顶的位置，还是可能会创建多个 Activity 实例。要解决该问题，就需要用到第三种启动模式 <code>singleTask</code>。</li>
-</ol>
-<h1 id="singleTask"><a href="#singleTask" class="headerlink" title="singleTask"></a>singleTask</h1><ol>
-<li>使用 <code>singleTask</code> 模式可以很好地解决重复创建栈顶 Activity 的问题。</li>
-<li>当 Activity 的启动模式指定为 <code>singleTask</code> ，每次启动该 Activity 时，系统首先会在返回栈中检查是否存在该 Activity 的实例，如果发现已经存在则直接使用该实例，并把返回栈中在这个 Activity 之上的所有 Activity 都出栈，如果没有发现就会创建一个新的Activity 实例。</li>
-</ol>
-<h1 id="singleInstance"><a href="#singleInstance" class="headerlink" title="singleInstance"></a>singleInstance</h1><ol>
-<li>不同于其他 3 种启动模式，指定为 singleInstance 模式的 Activity 会<strong>启用一个新的返回栈</strong>来管理这个 Acitivity。</li>
-<li>适用的场景：假设我们的程序中有一个 Activity 是允许其他程序调用的，我们想实现其他程序和我们的程序可以共享这个 Activity 的实例。<ol>
-<li>如果使用前面 3 种启动模式肯定是做不到的，因为每个应用程序都会有自己的返回栈，同一个 Activity 在不同的返回栈中入栈时必然是创建了新的实例。</li>
-<li>使用 <code>singleInstance</code> 模式：在一个新栈中创建该Activity实例，并让多个应用共享该栈中的该Activity实例。一旦该模式的Activity的实例存在于某个栈中，任何应用再激活该Activity时都会重用该栈中的实例，其效果相当于多个应用程序共享一个应用，不管谁激活该Activity，都会进入同一个应用中。</li>
-</ol>
-</li>
-</ol>
+        <table>
+<thead>
+<tr>
+<th>Value</th>
+<th style="text-align:center">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mcc</td>
+<td style="text-align:center">The IMSI mobile country code (MCC) has changed — that is, a SIM hasbeen detected and updated the MCC.移动国家号码，由三位数字组成，每个国家都有自己独立的MCC，可以识别手机用户所属国家。</td>
+</tr>
+<tr>
+<td>mnc</td>
+<td style="text-align:center">The IMSI mobile network code (MNC) has changed — that is, a SIM hasbeen detected and updated the MNC.移动网号，在一个国家或者地区中，用于区分手机用户的服务商</td>
+</tr>
+<tr>
+<td>locale</td>
+<td style="text-align:center">The locale has changed — for example, the user has selected a new language that text should be displayed in.用户所在地区发生变化。</td>
+</tr>
+<tr>
+<td>touchscreen</td>
+<td style="text-align:center">The touchscreen has changed. (This should never normally happen.)</td>
+</tr>
+<tr>
+<td>keyboard</td>
+<td style="text-align:center">The keyboard type has changed — for example, the user has plugged in an external keyboard.键盘模式发生变化，例如：用户接入外部键盘输入。</td>
+</tr>
+<tr>
+<td>keyboardHidden</td>
+<td style="text-align:center">The keyboard accessibility has changed — for example, the user has slid the keyboard out to expose it.用户打开手机硬件键盘</td>
+</tr>
+<tr>
+<td>navigation</td>
+<td style="text-align:center">The navigation type has changed. (This should never normally happen.)</td>
+</tr>
+<tr>
+<td>orientation</td>
+<td style="text-align:center">The screen orientation has changed — that is, the user has rotated the device.设备旋转，横向显示和竖向显示模式切换。</td>
+</tr>
+<tr>
+<td>fontScale</td>
+<td style="text-align:center">The font scaling factor has changed — that is, the user has selected a new global font size.全局字体大小缩放发生改变</td>
+</tr>
+</tbody>
+</table>
+<p>在 Activity 中添加了 <code>Android:configChanges</code> 属性，目的是当所指定的属性(Configuration Changes)发生改变时，通知程序调用<code>onConfigurationChanged()</code>方法。</p>
 
       
     </div>
@@ -383,8 +401,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/08/海量数据处理面试题-算法分析/" rel="next" title="海量数据处理面试题 算法分析">
-                <i class="fa fa-chevron-left"></i> 海量数据处理面试题 算法分析
+              <a href="/2017/11/30/onNewIntent-的使用/" rel="next" title="onNewIntent() 的使用">
+                <i class="fa fa-chevron-left"></i> onNewIntent() 的使用
               </a>
             
           </div>
@@ -393,8 +411,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/15/Java-Annotation-注解/" rel="prev" title="Java Annotation 注解">
-                Java Annotation 注解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/10/25/Activity-什么情况下会被回收/" rel="prev" title="Activity 什么情况下会被回收">
+                Activity 什么情况下会被回收 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -442,17 +460,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://avatars0.githubusercontent.com/u/22211624?v=3&u=6caf3b6c049755ce7c1df157d158a088f344cc65&s=400"
@@ -505,22 +514,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Activity-的启动模式"><span class="nav-number">1.</span> <span class="nav-text">Activity 的启动模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Standard"><span class="nav-number">2.</span> <span class="nav-text">Standard</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#singleTop"><span class="nav-number">3.</span> <span class="nav-text">singleTop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#singleTask"><span class="nav-number">4.</span> <span class="nav-text">singleTask</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#singleInstance"><span class="nav-number">5.</span> <span class="nav-text">singleInstance</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
